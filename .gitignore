@@ -1,5 +1,8 @@
+
+#Ignore thumbnails created by Windows
+Thumbs.db
+#Ignore files built by Visual Studio
 *.obj
-*.exe
 *.pdb
 *.user
 *.aps
@@ -24,4 +27,10 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
-.idea/
+#Nuget packages folder
+packages/
+node_modules
+.idea
+.DS_Store
+.npm
+node_modules

@@ -4,27 +4,41 @@
     {
         public int Compress(char[] chars)
         {
-            var cCount = 1;
-            var symbol = chars[1];
+            var insertIndex = 0;
+            char currentSymbol = chars[0];
             var counter = 1;
+            var length = 0;
 
-            for (int i = 0; i < chars.Length; i++)
+            for (int i = 1; i < chars.Length; i++)
             {
-                if (chars[i] == symbol)
+                if (chars[i] == currentSymbol)
                 {
                     counter++;
                 }
                 else
                 {
-                    cCount += counter == 1 ? 0 : counter.ToString().Length;
+                    string stringForInsert = null;
+                    if (counter > 1)
+                        stringForInsert = $"{currentSymbol}{counter}";
+                    else stringForInsert = currentSymbol.ToString();
+
+                        for (int j = 0; j < stringForInsert.Length; j++)
+                        chars[insertIndex + j] = stringForInsert[j];
+
+                    length += stringForInsert.Length;
+                    insertIndex = stringForInsert.Length + insertIndex;
                     counter = 1;
-                    symbol = chars[i];
+                    currentSymbol = chars[i];
                 }
             }
             
-            cCount += counter == 1 ? 0 : counter.ToString().Length;
+            var str = currentSymbol + (counter > 1 ? counter.ToString() : string.Empty);
+            for (int j = 0; j < str.Length; j++)
+                chars[insertIndex + j] = str[j];
 
-            return cCount;
+            length += str.Length;
+
+            return length;
         }
     }
 }
